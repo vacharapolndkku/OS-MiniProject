@@ -7,6 +7,7 @@ from pathlib import Path
 from unittest.mock import Mock, patch
 
 import macrocore as mc
+import macro_gui as gui
 from macro_gui import MacroApp
 
 
@@ -42,6 +43,59 @@ class MacroGuiTests(unittest.TestCase):
         self.assertTrue(self.app.stop_button.instate(["disabled"]))
         self.assertFalse(self.app.record_button.instate(["disabled"]))
         self.assertEqual(self.core.args.delay, 3)
+
+    def test_main_window_is_compact_and_settings_start_hidden(self):
+        self.root.update_idletasks()
+        area = self.root.winfo_reqwidth() * self.root.winfo_reqheight()
+        self.assertLess(area, 760 * 690 // 2)
+        self.assertEqual(self.app.settings_window.state(), "withdrawn")
+        self.assertFalse(self.app.advanced.winfo_manager())
+        self.assertIsNone(self.app.log_window)
+        self.assertTrue(self.app.show_hud.get())
+
+    def test_record_closes_settings_and_shows_hud_before_capture(self):
+        self.app.minimize.set(True)
+        with patch.object(self.root, "iconify") as minimize:
+            with patch.object(self.app, "_show_hud") as show:
+                with patch.object(self.app.settings_window, "withdraw") as hide_settings:
+                    self.app.record()
+        self.assertEqual(self.app.settings_window.state(), "withdrawn")
+        hide_settings.assert_called_once()
+        minimize.assert_called_once()
+        show.assert_called_once()
+        self.assertTrue(self.core.recording)
+        self.assertTrue(self.app.restore_when_idle)
+
+    def test_hidden_mode_leaves_no_hud(self):
+        self.app.minimize.set(True)
+        self.app.show_hud.set(False)
+        with patch.object(self.root, "iconify"):
+            with patch.object(self.app, "_show_hud") as show:
+                self.app.record()
+        show.assert_not_called()
+        self.assertFalse(self.app.hud_visible)
+
+    def test_stop_hides_hud_and_restores_main_window(self):
+        self.app.record()
+        self.app.hud_visible = True
+        self.app.restore_when_idle = True
+        self.core.commands.put("stop")
+        self.app.poll()
+        self.assertFalse(self.app.hud_visible)
+        self.app._restore.assert_called_once()
+
+    def test_hud_is_a_layered_click_through_nonactivating_tool_window(self):
+        hwnd = gui.configure_hud(self.app.hud)
+        style = gui._get_window_style(hwnd, -20)
+        self.assertEqual(style & gui.HUD_STYLES, gui.HUD_STYLES)
+        self.assertEqual(self.app.hud.state(), "withdrawn")
+
+    def test_auxiliary_windows_cannot_open_during_capture(self):
+        self.app.record()
+        self.app.show_settings()
+        self.app.show_history()
+        self.assertEqual(self.app.settings_window.state(), "withdrawn")
+        self.assertIsNone(self.app.log_window)
 
     def test_record_hotkey_and_emergency_stop_update_state(self):
         self.core.commands.put("record")
