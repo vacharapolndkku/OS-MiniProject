@@ -2,6 +2,7 @@ __pycache__/
 *.py[cod]
 .venv-build/
 build/
-dist/
+/dist/*
+!/dist/MacroCore.exe
 /drift_log.csv
 /macro.json

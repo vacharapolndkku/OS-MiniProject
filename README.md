@@ -9,8 +9,10 @@
 ไฟล์นี้รวม Python และ Tcl/Tk แล้ว สามารถคัดลอกเฉพาะ `.exe` ไปใช้บน Windows x64 ได้โดยไม่ต้องติดตั้ง Python แยก
 การแพ็ก `.exe` ช่วยให้เปิดใช้งานสะดวกขึ้น ตัวโปรแกรมยังใช้แกน Python เดิม
 
-หากดาวน์โหลดหรือ clone โปรเจกต์จาก GitHub ให้รันจาก source หรือ build `.exe` ตามหัวข้อด้านล่างก่อน
-โฟลเดอร์ `dist`, build cache และ build environment ถูกยกเว้นจาก Git ด้วย `.gitignore`
+[ดาวน์โหลด MacroCore.exe สำหรับ Windows x64](https://github.com/vacharapolndkku/OS-MiniProject/raw/refs/heads/main/dist/MacroCore.exe)
+
+repository เก็บ `.exe` รุ่นล่าสุดที่ `dist/MacroCore.exe` พร้อมใช้ หากแก้ source ต้อง build ใหม่ตามหัวข้อด้านล่าง
+build cache, build environment และไฟล์อื่นใน `dist` ถูกยกเว้นจาก Git ด้วย `.gitignore`
 `macro.json` และ drift log เป็นข้อมูลที่บันทึกในเครื่อง จึงไม่อัปโหลดไป repository; อัดมาโครใหม่หรือเลือกเปิดไฟล์ของตัวเองได้
 
 หากรันจาก source ต้องมี Windows และ Python 3.10 ขึ้นไป พร้อม Tcl/Tk (`tkinter`) ไม่ต้องติดตั้งแพ็กเกจผ่าน pip:
