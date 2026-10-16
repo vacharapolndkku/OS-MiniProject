@@ -19,7 +19,7 @@ if ($LASTEXITCODE -ne 0) { throw "Could not install the build tools." }
 $previousCache = [Environment]::GetEnvironmentVariable("PYINSTALLER_CONFIG_DIR", "Process")
 try {
     $env:PYINSTALLER_CONFIG_DIR = Join-Path $projectRoot "build\pyinstaller-cache"
-    & $buildPython -m PyInstaller --noconfirm --distpath (Join-Path $projectRoot "dist") --workpath (Join-Path $projectRoot "build") (Join-Path $projectRoot "MacroCore.spec")
+    & $buildPython -m PyInstaller --noconfirm --distpath (Join-Path $projectRoot "dist") --workpath (Join-Path $projectRoot "build") (Join-Path $projectRoot "SmallMission.spec")
     if ($LASTEXITCODE -ne 0) { throw "Executable build failed." }
 }
 finally {
@@ -31,6 +31,6 @@ finally {
     }
 }
 
-$executable = Join-Path $projectRoot "dist\MacroCore.exe"
-if (-not (Test-Path -LiteralPath $executable)) { throw "Build finished without producing MacroCore.exe." }
+$executable = Join-Path $projectRoot "dist\Small Mission.exe"
+if (-not (Test-Path -LiteralPath $executable)) { throw "Build finished without producing Small Mission.exe." }
 Write-Host "Ready: $executable"

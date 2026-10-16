@@ -3,6 +3,6 @@ __pycache__/
 .venv-build/
 build/
 /dist/*
-!/dist/MacroCore.exe
+!/dist/Small Mission.exe
 /drift_log.csv
 /macro.json

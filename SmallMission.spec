@@ -20,7 +20,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name="MacroCore",
+    name="Small Mission",
     debug=False,
     strip=False,
     upx=False,

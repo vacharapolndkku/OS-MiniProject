@@ -1,5 +1,5 @@
 """
-MacroCore: Capturing and Replaying OS Input Events via System Hooks
+Small Mission: Capturing and Replaying OS Input Events via System Hooks
 -------------------------------------------------------------------
 Windows only. Pure Python + ctypes (no third-party libraries), so every
 OS call (SetWindowsHookExW, GetMessageW, SendInput, timeBeginPeriod ...)
@@ -36,7 +36,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 
 if sys.platform != "win32":
-    sys.exit("MacroCore uses Win32 system hooks and runs on Windows only.")
+    sys.exit("Small Mission uses Win32 system hooks and runs on Windows only.")
 
 user32 = ctypes.WinDLL("user32", use_last_error=True)
 kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
@@ -575,7 +575,7 @@ def validate_events(data):
 
 
 def parse_args(argv=None, *, gui=False):
-    p = argparse.ArgumentParser(description="MacroCore input recorder / replayer")
+    p = argparse.ArgumentParser(description="Small Mission input recorder / replayer")
     p.add_argument("--file", default="macro.json", help="macro file for save/load")
     p.add_argument("--load", action="store_true", help="load --file at startup")
     p.add_argument("--speed", type=float, default=1.0, help="playback speed multiplier")

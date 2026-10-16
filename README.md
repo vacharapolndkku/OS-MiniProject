@@ -1,17 +1,17 @@
-# MacroCore
+# Small Mission
 
 โปรแกรมอัดและเล่นเมาส์/คีย์บอร์ดสำหรับ Windows มีทั้งหน้าต่าง GUI และ command line
 ใช้ Python standard library: `ctypes` สำหรับ Win32 hooks / SendInput และ `tkinter` สำหรับ GUI
 
 ## เริ่มใช้งาน
 
-ดับเบิลคลิก **`dist\MacroCore.exe`** เพื่อเปิดหน้าต่างโปรแกรมได้เลย ไม่มีหน้าต่าง command line
+ดับเบิลคลิก **`dist\Small Mission.exe`** เพื่อเปิดหน้าต่างโปรแกรมได้เลย ไม่มีหน้าต่าง command line
 ไฟล์นี้รวม Python และ Tcl/Tk แล้ว สามารถคัดลอกเฉพาะ `.exe` ไปใช้บน Windows x64 ได้โดยไม่ต้องติดตั้ง Python แยก
 การแพ็ก `.exe` ช่วยให้เปิดใช้งานสะดวกขึ้น ตัวโปรแกรมยังใช้แกน Python เดิม
 
-[ดาวน์โหลด MacroCore.exe สำหรับ Windows x64](https://github.com/vacharapolndkku/OS-MiniProject/raw/refs/heads/main/dist/MacroCore.exe)
+[ดาวน์โหลด Small Mission.exe สำหรับ Windows x64](https://github.com/vacharapolndkku/OS-MiniProject/raw/refs/heads/main/dist/Small%20Mission.exe)
 
-repository เก็บ `.exe` รุ่นล่าสุดที่ `dist/MacroCore.exe` พร้อมใช้ หากแก้ source ต้อง build ใหม่ตามหัวข้อด้านล่าง
+repository เก็บ `.exe` รุ่นล่าสุดที่ `dist/Small Mission.exe` พร้อมใช้ หากแก้ source ต้อง build ใหม่ตามหัวข้อด้านล่าง
 build cache, build environment และไฟล์อื่นใน `dist` ถูกยกเว้นจาก Git ด้วย `.gitignore`
 `macro.json` และ drift log เป็นข้อมูลที่บันทึกในเครื่อง จึงไม่อัปโหลดไป repository; อัดมาโครใหม่หรือเลือกเปิดไฟล์ของตัวเองได้
 
@@ -76,7 +76,7 @@ python macrocore.py --load --mouse-hz 0 --wait sleep
 
 `--loop 0` คือวนไม่สิ้นสุด, `--timer-1ms` เปิดคำขอ timer resolution, `--help` แสดงตัวเลือกทั้งหมด
 CLI ไม่รอก่อนเล่นโดยค่าเริ่มต้น และ F8 บันทึกตรงไปยัง `--file`
-ตัว `.exe` รับตัวเลือกของ GUI เหมือนกัน เช่น `MacroCore.exe --load --file "C:\path\macro.json"`
+ตัว `.exe` รับตัวเลือกของ GUI เหมือนกัน เช่น `"Small Mission.exe" --load --file "C:\path\macro.json"`
 ไฟล์มาโครเลือกเปิด/บันทึกผ่านหน้าต่างได้ ส่วน drift log ค่าเริ่มต้นอยู่ใน working directory ที่เปิดโปรแกรม
 
 ไฟล์ JSON ยังใช้รูปแบบ list ของ event เดิม เปิด `macro.json` ที่มีอยู่ได้
@@ -122,8 +122,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\build_exe.ps1
 ```
 
 Execution policy ข้างต้นมีผลเฉพาะ process ที่รันคำสั่ง ไม่ได้เปลี่ยนนโยบายของเครื่อง
-สคริปต์สร้าง `.venv-build` ในโปรเจกต์ ติดตั้ง build tools จาก `requirements-build.txt` แล้วใช้ `MacroCore.spec`
-ผลลัพธ์อยู่ที่ `dist\MacroCore.exe`; เมื่อแก้ source ต้อง build ใหม่เพื่อให้ `.exe` มีโค้ดล่าสุด
+สคริปต์สร้าง `.venv-build` ในโปรเจกต์ ติดตั้ง build tools จาก `requirements-build.txt` แล้วใช้ `SmallMission.spec`
+ผลลัพธ์อยู่ที่ `dist\Small Mission.exe`; เมื่อแก้ source ต้อง build ใหม่เพื่อให้ `.exe` มีโค้ดล่าสุด
 `build` และ `.venv-build` เป็นไฟล์ช่วย build ไม่ต้องส่งไปพร้อม `.exe`
 
 ผลตรวจ GUI รุ่นกะทัดรัดล่าสุด (15 ตุลาคม 2026, Asia/Bangkok):
@@ -150,7 +150,7 @@ Execution policy ข้างต้นมีผลเฉพาะ process ที
 โหมดตรวจ startup สำหรับผู้พัฒนา (ซ่อนหน้าต่าง เขียนรายงานแล้วปิดเอง):
 
 ```powershell
-.\dist\MacroCore.exe --self-test "$env:TEMP\MacroCore-self-test.json"
+& ".\dist\Small Mission.exe" --self-test "$env:TEMP\SmallMission-self-test.json"
 ```
 
 คำสั่งนี้สร้างรายงานในโฟลเดอร์ TEMP ของผู้ใช้ จึงใช้ได้แม้ลบโฟลเดอร์ `build` ไปแล้ว

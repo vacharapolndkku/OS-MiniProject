@@ -1,4 +1,4 @@
-"""A small Windows desktop interface for MacroCore. Run: python macro_gui.py"""
+"""A small Windows desktop interface for Small Mission. Run: python macro_gui.py"""
 
 import ctypes
 import json
@@ -66,7 +66,7 @@ class MacroApp:
         self.log_window = None
         self.log = None
         self.poll_id = None
-        root.title("MacroCore")
+        root.title("Small Mission")
         root.configure(background=BG)
         root.resizable(False, False)
         root.protocol("WM_DELETE_WINDOW", self.close)
@@ -101,7 +101,7 @@ class MacroApp:
         outer.pack(fill="both", expand=True)
         header = ttk.Frame(outer)
         header.pack(fill="x")
-        ttk.Label(header, text="MacroCore", font=("Segoe UI", 13, "bold")).pack(side="left")
+        ttk.Label(header, text="Small Mission", font=("Segoe UI", 13, "bold")).pack(side="left")
         self.status = ttk.Label(header, text="● พร้อม", foreground=GREEN)
         self.status.pack(side="right")
         self.filename = ttk.Label(outer, text=Path(core.args.file).name, style="Muted.TLabel")
@@ -147,7 +147,7 @@ class MacroApp:
 
         self.settings_window = tk.Toplevel(root)
         self.settings_window.withdraw()
-        self.settings_window.title("ตั้งค่า · MacroCore")
+        self.settings_window.title("ตั้งค่า · Small Mission")
         self.settings_window.configure(background=BG)
         self.settings_window.resizable(False, False)
         self.settings_window.protocol("WM_DELETE_WINDOW", self.apply_settings)
@@ -224,7 +224,7 @@ class MacroApp:
             return
         if self.log_window is None or not self.log_window.winfo_exists():
             self.log_window = tk.Toplevel(self.root)
-            self.log_window.title("ประวัติ · MacroCore")
+            self.log_window.title("ประวัติ · Small Mission")
             self.log_window.geometry("640x340")
             self.log_window.configure(background=BG)
             self.log = scrolledtext.ScrolledText(self.log_window, wrap="word", background=BG,
@@ -445,7 +445,7 @@ class MacroApp:
         if len(name) > 38:
             name = name[:20] + "…" + name[-14:]
         self.filename.configure(text=("* " if self.dirty else "") + name)
-        self.root.title(("* " if self.dirty else "") + "MacroCore")
+        self.root.title(("* " if self.dirty else "") + "Small Mission")
         self.record_button.configure(text="■ หยุด  F9" if recording else "● อัด  F9")
         self.play_button.configure(text="■ หยุด  F10" if playing else "▶ เล่น  F10")
         loops = "วนต่อเนื่อง" if self.core.args.loop == 0 else f"{self.core.args.loop} รอบ"
@@ -524,7 +524,7 @@ def main():
             Path(args.self_test).write_text(json.dumps({"passed": False, "error": str(exc)}, indent=2),
                                             encoding="utf-8")
         elif root is not None:
-            messagebox.showerror("เปิด MacroCore ไม่ได้", str(exc), parent=root)
+            messagebox.showerror("เปิด Small Mission ไม่ได้", str(exc), parent=root)
         return 1
     finally:
         if app is not None:
